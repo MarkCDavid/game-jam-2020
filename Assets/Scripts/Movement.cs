@@ -11,10 +11,11 @@ public class Movement : MonoBehaviour
 {
     Rigidbody rb;
     public Vector3 jump;
-    public float jumpForce = 2.0f;
-    public bool isgrounded = true;
-    public float speed = 0.0002f;
+    public float JumpForce = 3.5f;
+    public bool IsGrounded = true;
+    public float speed = 5f;
     private Transform camera;
+    private int JumpTime=0;
 
     void Start()
     {
@@ -24,14 +25,16 @@ public class Movement : MonoBehaviour
         jump = new Vector3(0.0f, 2.0f, 0.0f);
     }
 
+
     void OnCollisionStay()
     {
-        isgrounded = true;
+        IsGrounded = true;
     }
     void Update()
     {
         var forward = new Vector3(camera.forward.x, 0, camera.forward.z).normalized;
         var right = new Vector3(camera.right.x, 0, camera.right.z).normalized;
+        if (JumpTime > 0) JumpTime--;
         if (Input.GetKey("a"))
         {
             transform.position += -right * speed * Time.deltaTime;
@@ -48,10 +51,11 @@ public class Movement : MonoBehaviour
         {
             transform.position += forward * speed * Time.deltaTime;
         }
-        if (Input.GetKey("space")&&isgrounded)
+        if (Input.GetKey("space")&&IsGrounded&&JumpTime==0)
         {
-            isgrounded = false;
-            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+            JumpTime = 50;
+            IsGrounded = false;
+            rb.AddForce(jump * JumpForce, ForceMode.Impulse);
         }
     }
 
