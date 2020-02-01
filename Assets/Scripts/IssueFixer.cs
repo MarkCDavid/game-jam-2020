@@ -19,15 +19,22 @@ public class IssueFixer : MonoBehaviour
     void Update()
     {
         RaycastLookingAtIssue();
+        FixIssues();
+    }
 
-        if (Input.GetKey(KeyCode.Mouse0))
+    void FixIssues()
+    {
+        if (_currentIssue != null)
         {
-            
-        }
-        
-        if (Input.GetKey(KeyCode.Mouse1))
-        {
-            
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                _currentIssue.Weld();
+            }
+
+            else if (Input.GetKey(KeyCode.Mouse1))
+            {
+                _currentIssue.Spray();
+            }
         }
     }
 
