@@ -8,6 +8,7 @@ public class IssueFixer : MonoBehaviour
     public float rayDistance = 20f;
 
     public ParticleSystem extinguisherSmoke;
+    public ParticleSystem welderFire;
     private Camera _camera;
 
     private Issue _currentIssue;
@@ -39,8 +40,10 @@ public class IssueFixer : MonoBehaviour
         }
 
         if (lmb)
-            extinguisherSmoke.Emit(5);
+            extinguisherSmoke.Emit(10);
 
+        if(rmb)
+            welderFire.Emit(20);
 
     }
 
