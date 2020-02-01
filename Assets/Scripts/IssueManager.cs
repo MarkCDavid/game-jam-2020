@@ -10,6 +10,8 @@ public class IssueManager : MonoBehaviour
     public Transform issueSpots;
     public int maxIssueCount = 3;
     public float nextIssueSpawn = 10f;
+    public int CriticalIssueCount => _issues.Count(issue => issue.isCritical);
+    
 
     private IssueSpot[] _issueSpots;
     private List<IssueSpot> _unusedIssueSpots;
@@ -25,6 +27,7 @@ public class IssueManager : MonoBehaviour
         _unusedIssueSpots = _issueSpots.ToList();
         _usedIssueSpots = new List<IssueSpot>();
         _prng = new Random();
+        _issues = new List<Issue>();
     }
 
     void Update()
@@ -37,7 +40,7 @@ public class IssueManager : MonoBehaviour
         if (_currentIssueSpawnTime > nextIssueSpawn)
         {
             _currentIssueSpawnTime = 0;
-            CreateIssue();
+            _issues.Add(CreateIssue());
         }
     }
 
@@ -56,6 +59,8 @@ public class IssueManager : MonoBehaviour
             _usedIssueSpots.Remove(spot);
             if(!_unusedIssueSpots.Contains(spot))
                 _unusedIssueSpots.Add(spot);
+
+            _issues.Remove(issue);
         };
         return issue;
     }

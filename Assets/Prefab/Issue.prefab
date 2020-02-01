@@ -58,9 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4606c6ff85a8efa9a9bcc10eb68529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fixSpeed: 5
-  issueType: 0
-  criticalTime: 10
+  fixSpeed: 100
+  issueType: 1
+  criticalTime: 1
+  isCritical: 0
 --- !u!1 &6800956140504754317
 GameObject:
   m_ObjectHideFlags: 0

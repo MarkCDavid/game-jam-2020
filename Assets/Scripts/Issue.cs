@@ -20,7 +20,7 @@ public class Issue : MonoBehaviour
     public IssueType issueType;
     public float criticalTime;
 
-    private bool _isCritical = false;
+    public bool isCritical = false;
     private float _currentLifeTime = 0f;
     
 
@@ -32,12 +32,12 @@ public class Issue : MonoBehaviour
 
     void DoBreak()
     {
-        if (!_isCritical)
+        if (!isCritical)
         {
             _currentLifeTime += Time.deltaTime;
             if (_currentLifeTime > criticalTime)
             {
-                _isCritical = true;
+                isCritical = true;
                 onCritical?.Invoke();
             }
         }
