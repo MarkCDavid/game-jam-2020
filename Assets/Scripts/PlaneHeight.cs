@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlaneHeight : MonoBehaviour
@@ -28,8 +29,8 @@ public class PlaneHeight : MonoBehaviour
         var nextYPosition = transform.position.y - trueDescentSpeed;
         nextYPosition = Mathf.Clamp(nextYPosition, float.MinValue, 100f);
         transform.position = new Vector3(transform.position.x, nextYPosition, transform.position.z);
-        
+
         if (transform.position.y < heightTarget)
-            onPlaneFall?.Invoke();
+            SceneManager.LoadScene(3);
     }
 }

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LandEnding.unity
     guid: ef88a1001e43effc682fc473ad765ad5
+  - enabled: 1
+    path: Assets/Scenes/CrashEnding.unity
+    guid: 7ed2a3d5bbaed72fe85a176ccc23a2c8
   m_configObjects: {}

@@ -10,8 +10,8 @@ public class GameManager : MonoBehaviour
     private float _time = 0f;
     void Awake()
     {
-//        Cursor.lockState = CursorLockMode.Locked;
-//        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private float sixminutes = 6f * 60;
