@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FallEnding.unity
     guid: a4fdfe5fb85423fc0bb587629a687caa
+  - enabled: 1
+    path: Assets/Scenes/LandEnding.unity
+    guid: ef88a1001e43effc682fc473ad765ad5
   m_configObjects: {}

@@ -8,8 +8,9 @@ using Random = System.Random;
 public class IssueManager : MonoBehaviour
 {
     public Transform issueSpots;
-    public int maxIssueCount = 3;
-    public float nextIssueSpawn = 10f;
+    public List<int> maxIssueCounts;
+    public List<float> nextIssueSpawns;
+    public float levelTime = 20f;
     public int CriticalIssueCount => _issues.Count(issue => issue.isCritical);
     
 
@@ -20,6 +21,8 @@ public class IssueManager : MonoBehaviour
     private float _currentIssueSpawnTime = 0f;
     private List<Issue> _issues;
     private Random _prng;
+
+    private float _gameTime;
 
     private void Awake()
     {
@@ -33,11 +36,15 @@ public class IssueManager : MonoBehaviour
     void Update()
     {
         _currentIssueSpawnTime += Time.deltaTime;
+        _gameTime += Time.deltaTime;
 
-        if (_usedIssueSpots.Count >= maxIssueCount)
+        var level = _gameTime / levelTime;
+        var index = (int)Mathf.Min(level, maxIssueCounts.Count - 1);
+        
+        if (_usedIssueSpots.Count >= maxIssueCounts[index])
             _currentIssueSpawnTime = 0;
         
-        if (_currentIssueSpawnTime > nextIssueSpawn)
+        if (_currentIssueSpawnTime > nextIssueSpawns[index])
         {
             _currentIssueSpawnTime = 0;
             _issues.Add(CreateIssue());
