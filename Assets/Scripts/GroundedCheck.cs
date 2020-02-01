@@ -7,9 +7,9 @@ public class GroundedCheck : MonoBehaviour
 {
     public bool IsGrounded = true;
 
-    private void OnCollisionStay(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if (other.transform != transform.parent)
+        if(other.transform != transform.parent)
             IsGrounded = true;
     }
 }

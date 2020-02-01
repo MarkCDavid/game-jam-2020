@@ -30,7 +30,12 @@ public class Issue : MonoBehaviour
     }
 
 
-    private void FixIssue()
+    private void Weld()
+    {
+        
+    }
+
+    private void Spray()
     {
         
     }

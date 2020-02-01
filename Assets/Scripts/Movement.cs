@@ -20,7 +20,7 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-        camera = GetComponentInChildren<Camera>().transform;
+        camera = GetComponentInChildren<CameraLook>().transform;
         jump = new Vector3(0.0f, 2.0f, 0.0f);
         gc = GetComponentInChildren<GroundedCheck>();
     }

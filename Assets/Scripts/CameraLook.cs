@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [AddComponentMenu("Camera-Control/Smooth Mouse Look")]
-public class Camera : MonoBehaviour
+public class CameraLook : MonoBehaviour
 {
 
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
