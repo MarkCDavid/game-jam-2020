@@ -11457,13 +11457,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   issueSpots: {fileID: 1185603968}
-  maxIssueCounts: 020000000400000006000000080000000a000000
+  maxIssueCounts: 0a0000000a0000000a0000000a0000000a000000
   nextIssueSpawns:
-  - 10
-  - 10
-  - 8
-  - 8
-  - 6
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
   levelTime: 60
 --- !u!4 &1221317227
 Transform:
