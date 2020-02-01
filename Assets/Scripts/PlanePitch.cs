@@ -29,7 +29,7 @@ public class PlanePitch : MonoBehaviour
         _im = GetComponentInChildren<IssueManager>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         var criticalIssueCount = _im.CriticalIssueCount;
         _pitchTarget = criticalIssueCount * issuePitchChange;
@@ -42,11 +42,11 @@ public class PlanePitch : MonoBehaviour
         
         if (_pitchTarget < PitchCurrent)
         {
-            PitchCurrent -= pitchSpeed * Time.deltaTime;           
+            PitchCurrent -= pitchSpeed * Time.fixedDeltaTime;           
         }
         else if (_pitchTarget > PitchCurrent)
         {
-            PitchCurrent += pitchSpeed * Time.deltaTime;
+            PitchCurrent += pitchSpeed * Time.fixedDeltaTime;
         }
 
         if (Mathf.Abs(RollCurrent - RollTarget) < 0.05)
@@ -56,13 +56,12 @@ public class PlanePitch : MonoBehaviour
         }
         if (RollTarget < RollCurrent)
         {
-            RollCurrent -= RollSpeed * Time.deltaTime;
+            RollCurrent -= RollSpeed * Time.fixedDeltaTime;
         }
         else if (RollTarget > RollCurrent)
         {
-            RollCurrent += RollSpeed * Time.deltaTime;
+            RollCurrent += RollSpeed * Time.fixedDeltaTime;
         }
-        print(RollCurrent);
         transform.rotation = Quaternion.Euler(PitchCurrent, transform.rotation.y, RollCurrent);
 
     }

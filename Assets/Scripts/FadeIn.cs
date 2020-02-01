@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,6 +7,8 @@ using UnityEngine.UI;
 
 public class FadeIn : MonoBehaviour
 {
+    public Action OnFadeEnd;
+    
     public GameObject issues;
     public Image fadeImage;
     public float fadeTime;
@@ -26,13 +29,16 @@ public class FadeIn : MonoBehaviour
             while (_currentFadeTime < 0)
                 return;
 
-            var color = fadeImage.material.color;
+            var color = fadeImage.color;
             var alpha = Mathf.Lerp(1, 0, _currentFadeTime / fadeTime);
-            fadeImage.material.color = new Color(color.r, color.g, color.b, alpha);
+            fadeImage.color = new Color(color.r, color.g, color.b, alpha);
         }
 
-        if(_currentFadeTime > fadeTime)
+        if (_currentFadeTime > fadeTime)
+        {
             issues.SetActive(true);
+            OnFadeEnd?.Invoke();
+        }
 
     }
 

@@ -54,7 +54,7 @@ public class IssueManager : MonoBehaviour
         var issue = issuego.GetComponent<Issue>();
         issue.transform.SetParent(transform);
         issue.name = spot.name;
-        issue.onFixed += () =>
+        issue.onFixed += (_) =>
         {
             _usedIssueSpots.Remove(spot);
             if(!_unusedIssueSpots.Contains(spot))
@@ -62,6 +62,7 @@ public class IssueManager : MonoBehaviour
 
             _issues.Remove(issue);
         };
+        issue.onFixed += ScoreCalculator.AddScore;
         return issue;
     }
 

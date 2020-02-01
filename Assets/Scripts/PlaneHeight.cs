@@ -11,7 +11,7 @@ public class PlaneHeight : MonoBehaviour
     public float heightTarget = 0;
     public float heightChangeSpeed = 1f;
 
-    private float DecentSpeed => pitch.PitchCurrent * heightChangeSpeed * Time.deltaTime;
+    private float DecentSpeed => pitch.PitchCurrent * heightChangeSpeed * Time.fixedDeltaTime;
 
     private PlanePitch pitch;
     
@@ -22,9 +22,9 @@ public class PlaneHeight : MonoBehaviour
     }
     
 
-    void Update()
+    void FixedUpdate()
     {
-        var trueDescentSpeed = DecentSpeed * Time.deltaTime;
+        var trueDescentSpeed = DecentSpeed * Time.fixedDeltaTime;
         var nextYPosition = transform.position.y - trueDescentSpeed;
         nextYPosition = Mathf.Clamp(nextYPosition, float.MinValue, 100f);
         transform.position = new Vector3(transform.position.x, nextYPosition, transform.position.z);

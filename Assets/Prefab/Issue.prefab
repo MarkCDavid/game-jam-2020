@@ -61,6 +61,7 @@ MonoBehaviour:
   fixSpeed: 5
   issueType: 0
   criticalTime: 3
+  issueScore: 10
   isCritical: 0
 --- !u!1 &6800956140504754317
 GameObject:

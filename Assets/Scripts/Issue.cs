@@ -12,13 +12,15 @@ public enum IssueType
 
 public class Issue : MonoBehaviour
 {
-    public Action onFixed;
+    public Action<int> onFixed;
     public Action onCritical;
 
     public float fixSpeed;
 
     public IssueType issueType;
     public float criticalTime;
+
+    public int issueScore;
 
     public bool isCritical = false;
     private float _currentLifeTime = 0f;
@@ -63,7 +65,7 @@ public class Issue : MonoBehaviour
         _currentLifeTime -= Time.deltaTime * fixSpeed;
         if (_currentLifeTime <= 0)
         {
-            onFixed?.Invoke();
+            onFixed?.Invoke(issueScore);
             Destroy(gameObject);
         }
     }

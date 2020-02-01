@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
 
 
     
-    void Update()
+    void FixedUpdate()
     {
 
         var movementDelta = Vector3.zero;
@@ -41,16 +41,16 @@ public class Movement : MonoBehaviour
             if(speed>minspeed)
             speed -= sprint;
         if (Input.GetKey(KeyCode.A))
-                movementDelta += Time.deltaTime * speed * -CameraRight*sprint;
+                movementDelta += Time.fixedDeltaTime * speed * -CameraRight*sprint;
         if (Input.GetKey(KeyCode.D))
-                movementDelta += Time.deltaTime * speed * CameraRight*sprint;
+                movementDelta += Time.fixedDeltaTime * speed * CameraRight*sprint;
         if (Input.GetKey(KeyCode.S))
-                movementDelta += Time.deltaTime * speed * -CameraForward*sprint;
+                movementDelta += Time.fixedDeltaTime * speed * -CameraForward*sprint;
         if (Input.GetKey(KeyCode.W))
-                movementDelta += Time.deltaTime * speed * CameraForward*sprint;
+                movementDelta += Time.fixedDeltaTime * speed * CameraForward*sprint;
         
 
-        transform.position += Time.deltaTime * speed * movementDelta.normalized;
+        transform.position += Time.fixedDeltaTime * speed * movementDelta.normalized;
         
         
         if (Input.GetKey(KeyCode.Space)&& gc.IsGrounded)
