@@ -16,6 +16,8 @@ public class Movement : MonoBehaviour
     public float sprint = 1.5f;
     public float maxspeed = 15f;
     public float minspeed = 5f;
+
+    public AudioSource stepSound;
     private Transform camera;
 
     private GroundedCheck gc;
@@ -38,8 +40,11 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) && speed < maxspeed)
             speed += sprint;
         else
-            if(speed>minspeed)
-            speed -= sprint;
+        {
+            if (speed > minspeed)
+                speed -= sprint;
+        }
+
         if (Input.GetKey(KeyCode.A))
                 movementDelta += Time.fixedDeltaTime * speed * -CameraRight*sprint;
         if (Input.GetKey(KeyCode.D))
@@ -49,6 +54,10 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
                 movementDelta += Time.fixedDeltaTime * speed * CameraForward*sprint;
         
+        if(gc.IsGrounded && movementDelta.sqrMagnitude > 0)
+            stepSound.UnPause();
+        else
+            stepSound.Pause();
 
         transform.position += Time.fixedDeltaTime * speed * movementDelta.normalized;
         
