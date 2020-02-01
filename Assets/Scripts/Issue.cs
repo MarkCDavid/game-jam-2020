@@ -2,41 +2,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Object = System.Object;
+
+public enum IssueType
+{
+    Welder, Extinguisher
+}
 
 public class Issue : MonoBehaviour
 {
-    public Action OnFixed;
-    public Action OnCritical;
-    
-    public float CriticalTime;
+    public Action onFixed;
+    public Action onCritical;
+
+    public float fixSpeed;
+
+    public IssueType issueType;
+    public float criticalTime;
 
     private bool _isCritical = false;
     private float _currentLifeTime = 0f;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    
 
-    // Update is called once per frame
+
     void Update()
     {
-        _currentLifeTime += Time.deltaTime;
-        if (!_isCritical && _currentLifeTime > CriticalTime)
+        DoBreak();
+    }
+
+    void DoBreak()
+    {
+        if (!_isCritical)
         {
-            _isCritical = true;
-            OnCritical?.Invoke();
+            _currentLifeTime += Time.deltaTime;
+            if (_currentLifeTime > criticalTime)
+            {
+                _isCritical = true;
+                onCritical?.Invoke();
+            }
         }
+
+       
     }
 
 
-    private void Weld()
+    public void Weld()
     {
-        
+        if (issueType == IssueType.Welder)
+            Fix();
     }
 
-    private void Spray()
+    public void Spray()
     {
-        
+        if (issueType == IssueType.Extinguisher)
+            Fix();
+    }
+
+    private void Fix()
+    {
+        _currentLifeTime -= Time.deltaTime * fixSpeed;
+        if (_currentLifeTime <= 0)
+        {
+            onFixed?.Invoke();
+            Destroy(gameObject);
+        }
     }
 }

@@ -30,11 +30,14 @@ public class IssueManager : MonoBehaviour
     void Update()
     {
         _currentIssueSpawnTime += Time.deltaTime;
-        if (_usedIssueSpots.Count < maxIssueCount && _currentIssueSpawnTime > nextIssueSpawn)
+
+        if (_usedIssueSpots.Count >= maxIssueCount)
+            _currentIssueSpawnTime = 0;
+        
+        if (_currentIssueSpawnTime > nextIssueSpawn)
         {
             _currentIssueSpawnTime = 0;
             CreateIssue();
-            
         }
     }
 
@@ -47,7 +50,8 @@ public class IssueManager : MonoBehaviour
         var issuego = Instantiate(spot.IssueType, spot.transform.position, Quaternion.identity);
         var issue = issuego.GetComponent<Issue>();
         issue.transform.SetParent(transform);
-        issue.OnFixed += () =>
+        issue.name = spot.name;
+        issue.onFixed += () =>
         {
             _usedIssueSpots.Remove(spot);
             if(!_unusedIssueSpots.Contains(spot))
