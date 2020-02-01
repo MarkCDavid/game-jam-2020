@@ -6,6 +6,8 @@ using UnityEngine;
 public class IssueFixer : MonoBehaviour
 {
     public float rayDistance = 20f;
+
+    public ParticleSystem extinguisherSmoke;
     private Camera _camera;
 
     private Issue _currentIssue;
@@ -24,18 +26,22 @@ public class IssueFixer : MonoBehaviour
 
     void FixIssues()
     {
+
+        var lmb = Input.GetKey(KeyCode.Mouse0);
+        var rmb = Input.GetKey(KeyCode.Mouse1);
         if (_currentIssue != null)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
+            if (lmb)
                 _currentIssue.Weld();
-            }
 
-            else if (Input.GetKey(KeyCode.Mouse1))
-            {
+            if (rmb)
                 _currentIssue.Spray();
-            }
         }
+
+        if (lmb)
+            extinguisherSmoke.Emit(5);
+
+
     }
 
     void RaycastLookingAtIssue()
