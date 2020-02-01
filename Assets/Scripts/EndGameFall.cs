@@ -10,7 +10,7 @@ public class EndGameFall : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.text = $"Score {ScoreCalculator.CurrentScore}";
+        text.text = $"Score: {ScoreCalculator.CurrentScore}";
     }
 
 }
