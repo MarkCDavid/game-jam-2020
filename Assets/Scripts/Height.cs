@@ -13,7 +13,7 @@ public class Height : MonoBehaviour
         DecentSpeed  = Severity;        
     }
     void Update()
-    {      
+    {   if(transform.position.y + DecentSpeed<100)
         transform.position = new Vector3(transform.position.x, transform.position.y+DecentSpeed, transform.position.z);
         if (transform.position.y < HeightTarget)
             OnPlaneFall?.Invoke();
