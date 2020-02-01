@@ -8,8 +8,8 @@ public class Camera : MonoBehaviour
 
 	public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
 	public RotationAxes axes = RotationAxes.MouseXAndY;
-	public float sensitivityX = 10F;
-	public float sensitivityY = 10F;
+	public float sensitivityX = 20F;
+	public float sensitivityY = 20F;
 
 	public float minimumX = -360F;
 	public float maximumX = 360F;
