@@ -22,24 +22,26 @@ public class FadeIn : MonoBehaviour
 
     public void Update()
     {
-        if (_currentFadeTime <= fadeTime)
+        if (fadeImage != null)
         {
-            _currentFadeTime += Time.deltaTime;
+            if (_currentFadeTime <= fadeTime)
+            {
+                _currentFadeTime += Time.deltaTime;
 
-            while (_currentFadeTime < 0)
-                return;
+                while (_currentFadeTime < 0)
+                    return;
 
-            var color = fadeImage.color;
-            var alpha = Mathf.Lerp(1, 0, _currentFadeTime / fadeTime);
-            fadeImage.color = new Color(color.r, color.g, color.b, alpha);
+                var color = fadeImage.color;
+                var alpha = Mathf.Lerp(1, 0, _currentFadeTime / fadeTime);
+                fadeImage.color = new Color(color.r, color.g, color.b, alpha);
+            }
+
+            if (_currentFadeTime > fadeTime)
+            {
+                issues.SetActive(true);
+                OnFadeEnd?.Invoke();
+            }
         }
-
-        if (_currentFadeTime > fadeTime)
-        {
-            issues.SetActive(true);
-            OnFadeEnd?.Invoke();
-        }
-
     }
 
 }
