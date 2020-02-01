@@ -8,12 +8,19 @@ public class PlanePitch : MonoBehaviour
 {
     public float pitchSpeed = 0.05f;
     public float issuePitchChange = 3f;
-    
+
+    public float RollCurrent = 0f;
+    public float RollTarget = 0f;
+    public float RollSpeed = 0.05f;    
+
     [NonSerialized]
     public float PitchCurrent = 0;
 
     private IssueManager _im;
     private float _pitchTarget = 0;
+
+    private int Side = 0;
+    private System.Random random = new System.Random();
 
     private Rigidbody _rb;
 
@@ -41,7 +48,22 @@ public class PlanePitch : MonoBehaviour
         {
             PitchCurrent += pitchSpeed * Time.deltaTime;
         }
-        transform.rotation = Quaternion.Euler(PitchCurrent,0.0f ,0.0f);
+
+        if (Mathf.Abs(RollCurrent - RollTarget) < 0.05)
+        {
+            Side = random.Next(-15, 15);
+            RollTarget = Side;
+        }
+        if (RollTarget < RollCurrent)
+        {
+            RollCurrent -= RollSpeed * Time.deltaTime;
+        }
+        else if (RollTarget > RollCurrent)
+        {
+            RollCurrent += RollSpeed * Time.deltaTime;
+        }
+        print(RollCurrent);
+        transform.rotation = Quaternion.Euler(PitchCurrent, transform.rotation.y, RollCurrent);
 
     }
 
