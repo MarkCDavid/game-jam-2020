@@ -9,6 +9,9 @@ public class IssueFixer : MonoBehaviour
 
     public ParticleSystem extinguisherSmoke;
     public ParticleSystem welderFire;
+
+    public AudioSource extinguisherSound;
+    public AudioSource welderSound;
     private Camera _camera;
 
     private Issue _currentIssue;
@@ -40,10 +43,26 @@ public class IssueFixer : MonoBehaviour
         }
 
         if (lmb)
+        {
             extinguisherSmoke.Emit(10);
+            if(!extinguisherSound.isPlaying)
+                extinguisherSound.Play();
+        }
+        else
+        {
+            extinguisherSound.Stop();
+        }
 
-        if(rmb)
+        if (rmb)
+        {
             welderFire.Emit(20);
+            if(!welderSound.isPlaying)
+                welderSound.Play();
+        }
+        else
+        {
+            welderSound.Stop();
+        }
 
     }
 
