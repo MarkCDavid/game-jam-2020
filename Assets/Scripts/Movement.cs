@@ -13,6 +13,9 @@ public class Movement : MonoBehaviour
     public Vector3 jump;
     public float JumpForce = 3.5f;
     public float speed = 5f;
+    public float sprint = 1.5f;
+    public float maxspeed = 15f;
+    public float minspeed = 5f;
     private Transform camera;
 
     private GroundedCheck gc;
@@ -31,16 +34,21 @@ public class Movement : MonoBehaviour
     {
 
         var movementDelta = Vector3.zero;
-        
-        
+
+        if (Input.GetKey(KeyCode.LeftShift) && speed < maxspeed)
+            speed += sprint;
+        else
+            if(speed>minspeed)
+            speed -= sprint;
         if (Input.GetKey(KeyCode.A))
-            movementDelta += Time.deltaTime * speed * -CameraRight;
+                movementDelta += Time.deltaTime * speed * -CameraRight*sprint;
         if (Input.GetKey(KeyCode.D))
-            movementDelta += Time.deltaTime * speed * CameraRight;
+                movementDelta += Time.deltaTime * speed * CameraRight*sprint;
         if (Input.GetKey(KeyCode.S))
-            movementDelta += Time.deltaTime * speed * -CameraForward;
+                movementDelta += Time.deltaTime * speed * -CameraForward*sprint;
         if (Input.GetKey(KeyCode.W))
-            movementDelta += Time.deltaTime * speed * CameraForward;
+                movementDelta += Time.deltaTime * speed * CameraForward*sprint;
+        
 
         transform.position += Time.deltaTime * speed * movementDelta.normalized;
         
