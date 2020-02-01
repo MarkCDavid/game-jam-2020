@@ -63,7 +63,6 @@ public class PlanePitch : MonoBehaviour
             RollCurrent += RollSpeed * Time.fixedDeltaTime;
         }
         transform.rotation = Quaternion.Euler(PitchCurrent, transform.rotation.y, RollCurrent);
-
     }
 
 }
