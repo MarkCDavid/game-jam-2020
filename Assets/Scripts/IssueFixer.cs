@@ -36,10 +36,10 @@ public class IssueFixer : MonoBehaviour
         if (_currentIssue != null)
         {
             if (lmb)
-                _currentIssue.Weld();
+                _currentIssue.Spray();
 
             if (rmb)
-                _currentIssue.Spray();
+                _currentIssue.Weld();
         }
 
         if (lmb)

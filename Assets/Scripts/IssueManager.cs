@@ -57,8 +57,14 @@ public class IssueManager : MonoBehaviour
             return null;
 
         var spot = FetchIssueSpot();
-        var issuego = Instantiate(spot.IssueType, spot.transform.position, Quaternion.identity);
+        var issuego = Instantiate(spot.issueType, spot.transform.position, Quaternion.identity);
         var issue = issuego.GetComponent<Issue>();
+        if (spot.materialId < 0){}
+        else if (spot.materialId <= 14)
+            spot.planeRenderer.materials = UpdateMaterial(spot.planeRenderer.materials, spot.broken, spot.materialId);
+        else
+            spot.windowRenderer.materials = UpdateMaterial(spot.windowRenderer.materials, spot.pooped, spot.materialId);
+        
         issue.transform.SetParent(transform);
         issue.name = spot.name;
         issue.onFixed += (_) =>
@@ -68,9 +74,22 @@ public class IssueManager : MonoBehaviour
                 _unusedIssueSpots.Add(spot);
 
             _issues.Remove(issue);
+            
+            if (spot.materialId < 0){}
+            else if (spot.materialId <= 14)
+                spot.planeRenderer.materials = UpdateMaterial(spot.planeRenderer.materials, spot.nonBroken, spot.materialId);
+            else
+                spot.windowRenderer.materials = UpdateMaterial(spot.windowRenderer.materials, spot.nonPooped, spot.materialId);
         };
+        
         issue.onFixed += ScoreCalculator.AddScore;
         return issue;
+    }
+
+    private Material[] UpdateMaterial(Material[] collection, Material newMaterial, int id)
+    {
+        collection[id] = newMaterial;
+        return collection;
     }
 
     private IssueSpot FetchIssueSpot()

@@ -14,7 +14,7 @@ public class Issue : MonoBehaviour
 {
     public Action<int> onFixed;
     public Action onCritical;
-
+    
     public float fixSpeed;
 
     public IssueType issueType;
